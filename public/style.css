@@ -1,0 +1,9 @@
+*   {margin: 0;padding: 0;list-style: none;text-decoration: none;box-sizing: border-box;color: inherit;}
+header {border-bottom: 1px solid black; display: flex;justify-content: space-between;align-items: center;height: 80px;padding: 0 100px;}
+header img {height: 60px;}
+header .btns {display: flex;gap: 10px;}
+button {padding: 10px 15px;}
+form {display: flex;flex-direction: column;gap: 5px;align-items: start;}
+input {padding: 10px;}
+.bd {padding: 20px;border: 1px solid #ccc;width: fit-content;}
+.sign-content {display: flex;flex-direction: column;gap: 5px;align-items: start;}
