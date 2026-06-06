@@ -17,6 +17,7 @@ function back($msg = false)
 {
   if ($msg) echo "<script>alert('$msg')</script>";
   echo "<script>history.back()</script>";
+  exit;
 }
 function ss() {
   return $_SESSION["ss"] ?? false;

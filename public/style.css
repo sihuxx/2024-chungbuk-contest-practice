@@ -1,9 +1,18 @@
 *   {margin: 0;padding: 0;list-style: none;text-decoration: none;box-sizing: border-box;color: inherit;}
 header {border-bottom: 1px solid black; display: flex;justify-content: space-between;align-items: center;height: 80px;padding: 0 100px;}
 header img {height: 60px;}
-header .btns {display: flex;gap: 10px;}
 button {padding: 10px 15px;}
-form {display: flex;flex-direction: column;gap: 5px;align-items: start;}
+form {display: flex;flex-direction: column;gap: 20px;align-items: center;}
+.btns {display: flex;gap: 10px;flex-direction: row;}
 input {padding: 10px;}
-.bd {padding: 20px;border: 1px solid #ccc;width: fit-content;}
-.sign-content {display: flex;flex-direction: column;gap: 5px;align-items: start;}
+main {display: flex;align-items: center;flex-direction: column;}
+.box {display: flex;gap: 10px;}
+label {display: flex;gap: 5px;align-items: center;}
+.title {padding: 100px 0;}
+
+table tr td, th {padding: 20px;}
+tr {border-bottom: 1px solid #ccc;}
+thead {background-color: black;color: white;}
+table {border-collapse: collapse;}
+
+.modal {display: none;gap: 10px;justify-content: center;flex-direction: column;align-items: center;padding: 20px;border: 1px solid black;position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 2;background-color: white;}
