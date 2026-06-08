@@ -5,6 +5,8 @@ get('/', function () {
 });
 get('/logout', function () {
   session_destroy();
+  $user = ss();
+  db::exec("update users set is_login = 0 where idx = '$user->idx'");
   move("/", "로그아웃 성공");
 });
 get("/login", function () {
@@ -31,6 +33,7 @@ post("/signIn", function () {
   if ($user) {
     if ($user->pw == $pw) {
       $_SESSION["ss"] = $user;
+      db::exec("update users set is_login = 1 where idx = '$user->idx'");
       move("/", "로그인 성공");
     } else {
       back("로그인 실패");
