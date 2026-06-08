@@ -68,9 +68,29 @@ post("/carReject", function () {
   db::exec("update cars set status = 'rejected', reject_reason = '$reason' where idx = '$idx'");
   move('/respond', '차량 승인 거절');
 });
-post("/rideRequest", function() {
+post("/rideRequest", function () {
   extract($_POST);
   $user = ss();
-  db::exec("insert into reserves(user_idx, car_idx, driver_idx, start_location) values('$user->idx', '$car_idx', '$driver_idx', '$start_location')");
+  db::exec("insert into reserves(user_idx, car_idx, driver_idx, start_location, end_location) values('$user->idx', '$car_idx', '$driver_idx', '$start_location', '$end_location')");
   move('/reserve', "택시 예약 성공");
+});
+get("/poll", function () {
+  $user = ss();
+  $newRequest = db::fetch("select u.id as user_id, r.* from users u inner join reserves r on u.idx = r.user_idx where driver_idx = '$user->idx' and status = 'pending' order by idx desc limit 1");
+  echo json_encode(['newRequest' => $newRequest]);
+});
+post("/rideAccept", function() {
+  extract($_POST);
+  db::exec("update reserves set status = 'riding' where idx = '$idx'");
+  move('/mypage', "요청 승인");
+});
+post("/rideReject", function() {
+  extract($_POST);
+  db::exec("update reserves set status = 'rejected' where idx = '$idx'");
+  move('/mypage', "요청 거절");
+});
+post("/rideDone", function() {
+  extract($_POST);
+  db::exec("update reserves set status = 'done' where idx = '$idx'");
+  move("/mypage", "운행 종료");
 });

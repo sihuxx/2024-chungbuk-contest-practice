@@ -9,11 +9,12 @@ main {display: flex;align-items: center;flex-direction: column;width: 100%;}
 .box {display: flex;gap: 10px;}
 label {display: flex;gap: 5px;align-items: center;}
 .title {padding: 60px 0;}
+.popup {background-color: white;z-index: 2;padding: 30px;display: none;justify-content: center;align-items: center;flex-direction: column;gap: 10px;border: 1px solid black; position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);}
 
 table tr td, th {padding: 20px;text-align: center;}
 tr {border-bottom: 1px solid #ccc;}
 thead {background-color: black;color: white;}
 table {border-collapse: collapse;}
 
-.modal {display: none;gap: 10px;justify-content: center;flex-direction: column;align-items: center;padding: 20px;border: 1px solid black;position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 2;background-color: white;}
+.modal { display: none;gap: 10px;justify-content: center;flex-direction: column;align-items: center;padding: 20px;border: 1px solid black;position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 2;background-color: white;}
 footer {padding-top: 60px;}

@@ -2,6 +2,7 @@
 $user = ss();
 if ($user->type !== 'driver') back("기사 회원만 접근 할 수 있는 페이지입니다");
 $rejectCars = db::fetchAll("select * from cars where driver_idx = '$user->idx' and status = 'rejected'");
+$reserves = db::fetchAll("select * from reserves where driver_idx = '$user->idx' order by status desc, request_at");
 ?>
 
 <main>
@@ -57,5 +58,40 @@ $rejectCars = db::fetchAll("select * from cars where driver_idx = '$user->idx' a
     </table>
 
     <h1 class="title">차량운행목록</h1>
-    
+    <table>
+        <thead>
+            <th>회원ID</th>
+            <th>요청일시</th>
+            <th>요청가능여부</th>
+            <th>운행상태</th>
+            <th>출발지</th>
+            <th>도착지</th>
+            <th>관리</th>
+        </thead>
+        <tbody>
+            <?php foreach($reserves as $res) { 
+                $user = db::fetch("select * from users where idx = '$res->user_idx'");
+                $car = db::fetch("select * from cars where idx = '$res->car_idx'");
+                $today = ['일','월','화','수','목','금','토'][date('w')];
+                $riding = db::fetch("select * from reserves where driver_idx = '$res->driver_idx' and status = 'riding'");
+                $carRequest = str_contains($car->days, $today) && !$riding ? "가능" : "불가";
+                ?>
+                <tr>
+                    <td><?= $user->id ?></td>
+                    <td><?= $res->request_at ?></td>
+                    <td><?= $carRequest ?></td>
+                    <td><?= $res->status == 'pending' ? '대기중' : ($res->status == "riding" ? "승인-운행중" : ($res->status == "done" ? "승인-운행종료" : '거절')) ?></td>
+                    <td><?= $res->start_location ?></td>
+                    <td><?= $res->end_location ?></td>
+                    <td>
+                        <form class="btns" method="post">
+                            <input type="hidden" name="idx" value="<?= $res->idx ?>">
+                            <button>채팅하기</button>
+                            <button formaction="/rideDone" <?= $res->status != "riding" ? 'disabled' : '' ?>>운행종료</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 </main>
