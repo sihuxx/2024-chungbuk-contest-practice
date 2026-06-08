@@ -13,7 +13,10 @@ $user = ss();
 ?>
   
 <header>
-  <img src="/asset/logo.png">
+  <a href="/"><img src="/asset/logo.png"></a>
+  <div class="btns">
+    <a href="/reserve">택시 예약</a>
+  </div>
   <div class="btns">
     <?php if($user) { ?>
       <a href="/logout">로그아웃</a>

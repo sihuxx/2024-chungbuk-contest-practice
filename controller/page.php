@@ -13,6 +13,12 @@ get("/login", function () {
 get("/edit/{idx}", function ($idx) {
   views("edit", ["idx" => $idx]);
 });
+get("/reserve", function () {
+  views("reserve");
+});
+get("/requestTaxi", function () {
+  views("reverse");
+});
 get("/mypage", function () {
   if (ss()->type == 'admin') views("mypage/admin");
   else if (ss()->type == 'driver') views("mypage/driver");
@@ -61,4 +67,10 @@ post("/carReject", function () {
   extract($_POST);
   db::exec("update cars set status = 'rejected', reject_reason = '$reason' where idx = '$idx'");
   move('/respond', '차량 승인 거절');
+});
+post("/rideRequest", function() {
+  extract($_POST);
+  $user = ss();
+  db::exec("insert into reserves(user_idx, car_idx, driver_idx, start_location) values('$user->idx', '$car_idx', '$driver_idx', '$start_location')");
+  move('/reserve', "택시 예약 성공");
 });

@@ -5,7 +5,7 @@ button {padding: 10px 15px;}
 form {display: flex;flex-direction: column;gap: 20px;align-items: center;}
 .btns {display: flex;gap: 10px;flex-direction: row;}
 input {padding: 10px;}
-main {display: flex;align-items: center;flex-direction: column;}
+main {display: flex;align-items: center;flex-direction: column;width: 100%;}
 .box {display: flex;gap: 10px;}
 label {display: flex;gap: 5px;align-items: center;}
 .title {padding: 60px 0;}

@@ -33,10 +33,6 @@ $rejectCars = db::fetchAll("select * from cars where driver_idx = '$user->idx' a
         <button>등록 요청</button>
     </form>
     <h1 class="title">거절 차량 목록</h1>
-    <table>
-<thead>
-
-</thead>
      <table>
         <thead>
             <th>기사ID</th>
@@ -59,4 +55,7 @@ $rejectCars = db::fetchAll("select * from cars where driver_idx = '$user->idx' a
             <?php } ?>
         </tbody>
     </table>
+
+    <h1 class="title">차량운행목록</h1>
+    
 </main>
