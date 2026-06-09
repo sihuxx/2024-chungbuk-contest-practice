@@ -2,7 +2,7 @@
 $user = ss();
 if ($user->type !== 'driver') back("기사 회원만 접근 할 수 있는 페이지입니다");
 $rejectCars = db::fetchAll("select * from cars where driver_idx = '$user->idx' and status = 'rejected'");
-$reserves = db::fetchAll("select * from reserves where driver_idx = '$user->idx' order by status desc, request_at");
+$reserves = db::fetchAll("select * from reserves where driver_idx = '$user->idx' order by status asc, request_at");
 ?>
 
 <main>
@@ -86,7 +86,7 @@ $reserves = db::fetchAll("select * from reserves where driver_idx = '$user->idx'
                     <td>
                         <form class="btns" method="post">
                             <input type="hidden" name="idx" value="<?= $res->idx ?>">
-                            <button>채팅하기</button>
+                            <button formaction="/chatAdd" <?= $res->status != 'riding' ? 'disabled' : '' ?>>채팅하기</button>
                             <button formaction="/rideDone" <?= $res->status != "riding" ? 'disabled' : '' ?>>운행종료</button>
                         </form>
                     </td>

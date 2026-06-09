@@ -97,3 +97,16 @@ post("/rideDone", function() {
   db::exec("update reserves set status = 'done' where idx = '$idx'");
   move("/mypage", "운행 종료");
 });
+
+get('/test', function () {
+  require_once "../views/test.php";
+});
+
+get('/users', function () {
+  $users = db::fetchAll('select * from users');
+
+  header('Content-Type: application/json');
+  echo json_encode($users);
+});
+
+
